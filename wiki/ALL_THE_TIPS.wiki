@@ -4,9 +4,9 @@
 
 *How to identity the dates of startup (for the 14 of June):
 {{{
-sudo cat /var/log/system.log|external_bin/grep 'PCID enabled' | awk '{print$1,$2,$3}'|external_bin/grep 'Jun 14'|external_bin/grep ''
-sudo bzcat /var/log/system.log.*|external_bin/grep 'PCID enabled' | awk '{print$1,$2,$3}'|external_bin/grep 'Jun 14'|external_bin/grep ''
-{{{
+$sudo cat /var/log/system.log|external_bin/grep 'PCID enabled' | awk '{print$1,$2,$3}'|external_bin/grep 'Jun 14'|external_bin/grep ''
+$sudo bzcat /var/log/system.log.*|external_bin/grep 'PCID enabled' | awk '{print$1,$2,$3}'|external_bin/grep 'Jun 14'|external_bin/grep ''
+}}}
 
 
 == *WIFI* ==
