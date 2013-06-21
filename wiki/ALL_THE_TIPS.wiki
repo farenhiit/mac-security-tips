@@ -14,7 +14,7 @@ TO DO
 
 *How to display available WiFI networks:
 {{{
-#sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en1 -s
+$sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en1 -s
                  FreeWifi_secure 16:10:18:47:f2:4d -83  5       Y  -- WPA(802.1x/AES/AES) 
                     Livebox-eaXX 00:1d:6a:45:06:eb -79  6       Y  FR WPA(PSK/AES,TKIP/TKIP) WPA2(PSK/AES,TKIP/TKIP) 
                   Freebox-4862XX f4:ca:e5:e1:ec:ac -88  8       Y  -- WPA(PSK/AES/AES) 
@@ -32,12 +32,17 @@ TO DO
 
 *How to join WiFI networks (or test pre-shared key) : 
 {{{
-#sudo /usr/sbin/networksetup -setairportnetwork en1 "yellowstay" "P@ssword8888" 
+$/usr/sbin/networksetup -setairportnetwork en1 "yellowstay" "P@ssword8888" 
     ==> good pre-shared key (no error message)
 }}}
 
 {{{
-# sudo /usr/sbin/networksetup -setairportnetwork en1 "yellowstay" "P@ssword12345" 
+$/usr/sbin/networksetup -setairportnetwork en1 "yellowstay" "P@ssword12345" 
 Failed to join network yellowstay.
     ==> bad pre-shared key (error message)
+}}}
+
+*How to disassociate you of a WiFI network : 
+{{{
+$sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en1 -z
 }}}
