@@ -12,7 +12,7 @@ TO DO
  ** [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
  * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
 
-* How to display available WiFI networks:
+ * How to display available WiFI networks:
 {{{
 #sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport interface_wifi -s
                  FreeWifi_secure 16:10:18:47:f2:4d -83  5       Y  -- WPA(802.1x/AES/AES) 
