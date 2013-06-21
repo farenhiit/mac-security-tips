@@ -8,12 +8,11 @@ TO DO
 
 == *WIFI* ==
 
-My Wifi Scripts : 
- * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
+* My Wifi Scripts : 
+ ** [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
  * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
 
-
-How to display available WiFI networks:
+* How to display available WiFI networks:
 {{{
 #sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport interface_wifi -s
                  FreeWifi_secure 16:10:18:47:f2:4d -83  5       Y  -- WPA(802.1x/AES/AES) 
@@ -31,7 +30,7 @@ How to display available WiFI networks:
                         HP0142F9 02:2d:8d:e6:9f:e0 -65  10      N  EU NONE
 }}}
 
-How to join WiFI networks (or test pre-shared key) : 
+* How to join WiFI networks (or test pre-shared key) : 
 {{{
 #sudo /usr/sbin/networksetup -setairportnetwork en1 "yellowstay" "P@ssword8888" 
     ==> good pre-shared key (no error message)
