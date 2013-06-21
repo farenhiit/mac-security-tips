@@ -9,8 +9,8 @@ TO DO
 == *WIFI* ==
 
 My Wifi Scripts : 
-* [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
-* [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
+ * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
+ * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
 
 
 How to display available WiFI networks:
