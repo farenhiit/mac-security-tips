@@ -1,15 +1,177 @@
 #summary All my tips are here.
 
-== *FORENSICS* ==
+== *\\FORENSICS - EVENTS//* ==
 
-*How to identify the startup dates (_for the 14 of June_):
+===Proof Of Concept===
+ * CheckOut4Mac : [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
+ * SpyScreen4Mac : [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
+
+===STARTUP ACTIVITIES===
+====Startup dates/hours on July 8====
 {{{
-$sudo cat /var/log/system.log|grep 'BOOT_TIME'|awk '{print$1,$2,$3}'|grep 'Jun 14'
-$sudo bzcat /var/log/system.log.*|grep 'BOOT_TIME'|awk '{print$1,$2,$3}'|grep 'Jun 14'
+[On Lion and Mountain Lion] $sudo grep -i 'BOOT_TIME' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'BOOT_TIME' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+}}}
+====Stopping dates/hours on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'SHUTDOWN_TIME' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'SHUTDOWN_TIME' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+}}}
+====Hibernation dates/hours on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'hibernate_setup(0) took' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'hibernate_setup(0) took' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+[On Lion] $sudo grep -i 'PMScheduleWakeEventChooseBest' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'PMScheduleWakeEventChooseBest' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+}}}
+====Out of hibernation dates/hours on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'Wake reason' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'Wake reason' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+[On Lion] $sudo syslog -T utc+2 -F raw -f /var/log/asl/2013.07.08.*|grep 'Message Wake'|grep -i 'Jul  8'|cut -d ] -f 2|sed -e 's/\ \[Time/g'
 }}}
 
 
-== *WIFI* ==
+===SESSION ACTIVITIES===
+====Locked session dates/hours on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'Application App:"loginwindow"' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'Application App:"loginwindow"' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+[On Lion] $sudo grep -i 'loginwindow' /var/log/windowserver.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
+}}}
+====Attempt to unlocked session without success on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i -B 9 'The authtok is incorrect.' /var/log/system.log|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+$sudo bzgrep -i -B 9 'The authtok is incorrect.' /var/log/system.log.*|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+[On Lion] $sudo grep -i -B 9 'The authtok is incorrect.' /var/log/secure.log|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+$sudo bzgrep -i -B 9 'The authtok is incorrect.' /var/log/secure.log.*|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+}}}
+====Unlocked session with success on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i -A 1 'Establishing credentials' /var/log/system.log|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+$sudo bzgrep -i -A 1 'Establishing credentials' /var/log/system.log.*|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+[On Lion] $sudo grep -i -A 1 'Establishing credentials' /var/log/secure.log|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'
+$sudo bzgrep -i -A 1 'Establishing credentials' /var/log/secure.log.*|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'}}}
+}}}
+
+===PHYSICAL CONNECTION ACTIVITIES===
+====USB connections (loaded USB extensions) on July 8====
+{{{
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
+}}}
+====USB plugged devices on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'USBMSC' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3" => New plugged USB Device - USBMSC Identifier: "$10"(vendor)",$11"(Device) - To identify the plugged device : http:/www.linux-usb.org/usb.ids"}'
+$sudo bzgrep -i 'USBMSC' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3" => New plugged USB Device - USBMSC Identifier: "$10"(vendor)",$11"(Device) - To identify the plugged device : http:/www.linux-usb.org/usb.ids"}'
+[On Lion] $sudo grep -i 'USBMSC' /var/log/kernel.log|grep -i 'Jul  8'|awk '{print$1,$2,$3" => New plugged USB Device - USBMSC Identifier: "$10"(vendor)",$11"(Device) - To identify the plugged device : http:/www.linux-usb.org/usb.ids"}'
+$sudo bzgrep -i 'USBMSC' /var/log/kernel.log.*|grep -i 'Jul  8'|awk '{print$1,$2,$3" => New plugged USB Device - USBMSC Identifier: "$10"(vendor)",$11"(Device) - To identify the plugged device : http:/www.linux-usb.org/usb.ids"}'
+}}}
+====File system events(USB, mounting, etc.) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'fsevents' /var/log/system.log|grep -i 'Jul  8'
+$sudo bzgrep -i 'fsevents' /var/log/system.log.*|grep -i 'Jul  8'
+}}}
+====Firewire connections with an other machine or storage media (loaded Firewire extensions)====
+{{{
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
+}}}
+====Firewire connections with an other machine or storage media (activation of 'fw' interface)====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'fw' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'fw' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+}}}
+====Firewire connections to dump RAM (loaded extensions IOFireWireSBP2/iPodDriver) just a supposition====
+{{{
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
+}}}
+
+
+===ESCALATION PRIVILEGES ACTIVITIES===
+====Opened/Closed TTY terminals on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'ttys' /var/log/system.log|grep -i 'Jul  8'| egrep 'USER_PROCESS|DEAD_PROCESS'|sed -e 's/USER_PROCESS/OPENING TERMINAL/g' |sed -e 's/DEAD_PROCESS/CLOSING TERMINAL/g'| awk '{print $1,$2,$3,$6,$7,$9}'
+$sudo bzgrep -i 'ttys' /var/log/system.log.*|grep -i 'Jul  8'| egrep 'USER_PROCESS|DEAD_PROCESS'|sed -e 's/USER_PROCESS/OPENING TERMINAL/g' |sed -e 's/DEAD_PROCESS/CLOSING TERMINAL/g'| awk '{print $1,$2,$3,$6,$7,$9}'
+}}}
+====ROOT commands executed with success on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'sudo\[' /var/log/system.log|grep -i 'Jul  8'
+$sudo grep -i 'sudo\[' /var/log/system.log.*|grep -i 'Jul  8'
+[On Lion] $sudo grep -i 'sudo\[' /var/log/secure.log|grep -i 'Jul  8'
+$sudo grep -i 'sudo\[' /var/log/secure.log.*|grep -i 'Jul  8'
+}}}
+====Attempt to execute commands with SUDO without success on July 8====
+{{{
+[On Mountain Lion] $sudo grep -i 'incorrect password attempts' /var/log/system.log|grep -i 'Jul  8'
+$sudo bzgrep -i 'incorrect password attempts' /var/log/system.log.*|grep -i 'Jul  8'
+[On Lion] $sudo grep -i 'incorrect password attempts' /var/log/secure.log|grep -i 'Jul  8'
+$sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul  8'
+}}}
+====User, password modification and creation on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo praudit -xn /var/audit/current|egrep 'create user|modify password|delete user' -A 3|grep -i 'Jul  8' -A 3|sed 's/\&apos\;/"/g'
+}}}
+
+===APPLICATIONS ACTIVITIES===
+====Opened applications (last access dates) on July 8====
+{{{
+[On Moutain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |egrep  -i '8 Jul|8 Jul'|grep -v root|awk '{$7=""}1'
+[On Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist|egrep -i 'Jul  8|Jul  8'|grep -v root|awk '{$7=""}1'
+}}}
+
+===FILES ACTIVITIES===
+====Modified files (like autorun App, LaunchAgents or LaunchDaemons) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo find /path_to_file -type f -exec stat -f '%Sm %N' '{}' + |grep -i 'Jul  8'|grep 2013
+}}}
+====Added files (like trojan or malware App) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo find /path_to_directory -type f -exec stat -f '%SB %N' '{}' + |grep -i 'Jul  8'|grep 2013
+}}}
+====Accessed files (like your secret files) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo find /path_to_directory -type f  -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
+}}}
+====Accessed Mails (last access dates) on July 8
+{{{
+[On Lion and Mountain Lion] grep /Users/sudoman/Library/Mail/V2/IMAP-YYYY\@mail.XXXX.fr/INBOX.mbox/ -type f -name *.emlx -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
+}}}
+
+===NETWORK ACTIVITIES===
+====Network connections (based on DNS queries) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'DNS+' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'DNS+' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+}}}
+====Network disconnections (based on DNS queries) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'DNS-' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'DNS-' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+}}}
+====Ethernet connections (activation of 'en0' interface) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'en0' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'en0' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+}}}
+====WiFI connections (activation of 'en1' interface) on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo grep -i 'en1' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+$sudo bzgrep -i 'en1' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+}}}
+====WiFI access points (last connection dates) / warning to the time zone on July 8====
+{{{
+[On Lion and Mountain Lion] $sudo defaults read /Volumes/Macintosh\ HD/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist| sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 3 |grep -A 3 2013-07-08
+}}}
+
+
+
+== *\\FORENSICS - LEAK INFO//* ==
+*Soon ...
+
+
+== *\\WIFI//* ==
 
 *My Wifi Scripts:
  * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
