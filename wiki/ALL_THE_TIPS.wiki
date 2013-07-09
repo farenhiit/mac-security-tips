@@ -57,8 +57,8 @@ $sudo bzgrep -i -A 1 'Establishing credentials' /var/log/secure.log.*|grep -i 'J
 ===PHYSICAL CONNECTION ACTIVITIES===
 ====USB connections (loaded USB extensions) on July 8====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 ====USB plugged devices on July 8====
 {{{
@@ -74,8 +74,8 @@ $sudo bzgrep -i 'fsevents' /var/log/system.log.*|grep -i 'Jul  8'
 }}}
 ====Firewire connections with an other machine or storage media (loaded Firewire extensions)====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 ====Firewire connections with an other machine or storage media (activation of 'fw' interface)====
 {{{
@@ -84,8 +84,8 @@ $sudo bzgrep -i 'fw' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network change
 }}}
 ====Firewire connections to dump RAM (loaded extensions IOFireWireSBP2/iPodDriver) just a supposition====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i '8 Jul|8 Jul'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|egrep -i 'Jul  8|Jul  8'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
+[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 
 
@@ -117,8 +117,8 @@ $sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul
 ===APPLICATIONS ACTIVITIES===
 ====Opened applications (last access dates) on July 8====
 {{{
-[On Moutain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |egrep  -i '8 Jul|8 Jul'|grep -v root|awk '{$7=""}1'
-[On Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist|egrep -i 'Jul  8|Jul  8'|grep -v root|awk '{$7=""}1'
+[On Moutain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
+[On Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist|grep -i '|Jul  8'|grep -v root|awk '{$7=""}1'
 }}}
 
 ===FILES ACTIVITIES===
@@ -142,23 +142,20 @@ $sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul
 ===NETWORK ACTIVITIES===
 ====Network connections (based on DNS queries) on July 8====
 {{{
-[On Lion and Mountain Lion] $sudo grep -i 'DNS+' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+[On Mountain Lion] $sudo grep -i 'DNS+' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 $sudo bzgrep -i 'DNS+' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 }}}
 ====Network disconnections (based on DNS queries) on July 8====
 {{{
-[On Lion and Mountain Lion] $sudo grep -i 'DNS-' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+[On Mountain Lion] $sudo grep -i 'DNS-' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 $sudo bzgrep -i 'DNS-' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 }}}
-====Ethernet connections (activation of 'en0' interface) on July 8====
+====Ethernet/WiFI connections (activation of 'en0' interface) on July 8====
 {{{
-[On Lion and Mountain Lion] $sudo grep -i 'en0' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+[On Mountain Lion] $sudo grep -i 'en0' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 $sudo bzgrep -i 'en0' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
-}}}
-====WiFI connections (activation of 'en1' interface) on July 8====
-{{{
-[On Lion and Mountain Lion] $sudo grep -i 'en1' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
-$sudo bzgrep -i 'en1' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
+[On Lion] $sudo egrep -i 'frequent transitions|network configuration changed' /var/log//system.log|external_bin/grep_gnu_lion -i 'Jul  8'
+$sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log//system.log.*|external_bin/grep_gnu_lion -i 'Jul  9'
 }}}
 ====WiFI access points (last connection dates) / warning to the time zone on July 8====
 {{{
