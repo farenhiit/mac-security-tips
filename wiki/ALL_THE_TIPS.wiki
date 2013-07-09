@@ -3,7 +3,7 @@
 == *\\FORENSICS - EVENTS//* ==
 
 ===Proof Of Concept===
- * CheckOut4Mac : [https://code.google.com/p/checkout4mac/]
+ * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
 
 ===STARTUP ACTIVITIES===
 ====Startup dates/hours on July 8====
