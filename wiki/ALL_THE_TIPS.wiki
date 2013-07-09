@@ -154,8 +154,8 @@ $sudo bzgrep -i 'DNS-' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network chan
 {{{
 [On Mountain Lion] $sudo grep -i 'en' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 $sudo bzgrep -i 'en' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
-[On Lion] $sudo egrep -i 'frequent transitions|network configuration changed' /var/log/system.log|external_bin/grep_gnu_lion -i 'Jul  8'
-$sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log/system.log.*|external_bin/grep_gnu_lion -i 'Jul  8'
+[On Lion] $sudo egrep -i 'frequent transitions|network configuration changed' /var/log/system.log|grep -i 'Jul  8'
+$sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log/system.log.*|grep -i 'Jul  8'
 }}}
 ====WiFI access points (last connection dates) / warning to the time zone on July 8====
 {{{
