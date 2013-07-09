@@ -2,7 +2,7 @@
 
 == *\\FORENSICS - EVENTS//* ==
 
-===Proof Of Concept===
+===PROOF OF CONCEPT===
  * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
 
 ===STARTUP ACTIVITIES===
