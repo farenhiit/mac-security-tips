@@ -3,8 +3,7 @@
 == *\\FORENSICS - EVENTS//* ==
 
 ===Proof Of Concept===
- * CheckOut4Mac : [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
- * SpyScreen4Mac : [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
+ * CheckOut4Mac : [https://code.google.com/p/checkout4mac/]
 
 ===STARTUP ACTIVITIES===
 ====Startup dates/hours on July 8====
@@ -55,10 +54,10 @@ $sudo bzgrep -i -A 1 'Establishing credentials' /var/log/secure.log.*|grep -i 'J
 }}}
 
 ===PHYSICAL CONNECTION ACTIVITIES===
-====USB connections (loaded USB extensions) on July 8====
+====USB connections (last loading dates of USB extensions) on July 8====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
+[On Mountain Lion and Lion] $sudo stat -f '%Sa %N' /System/Library/Extensions/*|external_bin/grep_gnu_lion -i 'Jul  8'|external_bin/grep_gnu_lion 2013|egrep -i 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'
+$sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 ====USB plugged devices on July 8====
 {{{
@@ -72,20 +71,20 @@ $sudo bzgrep -i 'USBMSC' /var/log/kernel.log.*|grep -i 'Jul  8'|awk '{print$1,$2
 [On Lion and Mountain Lion] $sudo grep -i 'fsevents' /var/log/system.log|grep -i 'Jul  8'
 $sudo bzgrep -i 'fsevents' /var/log/system.log.*|grep -i 'Jul  8'
 }}}
-====Firewire connections with an other machine or storage media (loaded Firewire extensions)====
+====Firewire connections with an other machine or storage media (last loading dates of Firewire extensions)====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion and Mountain Lion] $sudo stat -f '%Sa %N' /System/Library/Extensions/*|external_bin/grep_gnu_lion -i 'Jul  8'|external_bin/grep_gnu_lion 2013|egrep -i 'IOFireWireFamily.kext|IOFireWireIP.kext'
+$sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'IOFireWireFamily.kext|IOFireWireIP.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 ====Firewire connections with an other machine or storage media (activation of 'fw' interface)====
 {{{
 [On Lion and Mountain Lion] $sudo grep -i 'fw' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 $sudo bzgrep -i 'fw' /var/log/system.log.*|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
 }}}
-====Firewire connections to dump RAM (loaded extensions IOFireWireSBP2/iPodDriver) just a supposition====
+====Firewire connections to dump RAM (last loading dates of extensions IOFireWireSBP2/iPodDriver) just a supposition====
 {{{
-[On Mountain Lion] $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
-[On Lion] $sudo ls -lu /System/Library/Extensions/|grep -i 'Jul  8'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
+[On Lion and Mountain Lion] $sudo stat -f '%Sa %N' /System/Library/Extensions/*|external_bin/grep_gnu_lion -i 'Jul  8'|external_bin/grep_gnu_lion 2013|egrep -i 'iPodDriver.kext|IOFireWireSBP2.kext'
+$sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'iPodDriver.kext|IOFireWireSBP2.kext'| awk '{print $7,$6,$8,$9}'
 }}}
 
 
@@ -117,22 +116,26 @@ $sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul
 ===APPLICATIONS ACTIVITIES===
 ====Opened applications (last access dates) on July 8====
 {{{
-[On Moutain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
-[On Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist|grep -i '|Jul  8'|grep -v root|awk '{$7=""}1'
+[On Lion and Mountain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
+$sudo stat -f '%Sa %N' /Applications/*/*/* |external_bin/grep_gnu_lion -i 'Jul  8'
+$sudo find /Applications/ -name "Info.plist" -type f -exec stat -f '%Sa %N' {} \;|grep 'Jul  8'
 }}}
 
 ===FILES ACTIVITIES===
 ====Modified files (like autorun App, LaunchAgents or LaunchDaemons) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_file -type f -exec stat -f '%Sm %N' '{}' + |grep -i 'Jul  8'|grep 2013
+for example, path_to_file=["/System/Library/XPCServices/","/System/Library/LaunchAgents/","/Library/LaunchAgents/","/Users/sudoman/Library/LaunchAgents/","/System/Library/LaunchDaemons/","/Library/LaunchDaemons/"]
 }}}
 ====Added files (like trojan or malware App) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_directory -type f -exec stat -f '%SB %N' '{}' + |grep -i 'Jul  8'|grep 2013
+for example, path_to_directory=["/Users/sudoman/Library/Preferences/com.apple.loginitems.plist","/etc/passwd"]
 }}}
 ====Accessed files (like your secret files) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_directory -type f  -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
+for example, path_to_directory=["/Users/sudoman","/Volume/Supersecret"]
 }}}
 ====Accessed Mails (last access dates) on July 8
 {{{
