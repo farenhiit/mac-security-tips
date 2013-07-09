@@ -168,7 +168,7 @@ $sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log/s
 
 
 == *\\FORENSICS - LEAK INFO//* ==
-*Soon ...
+*Coming Soon ...
 
 
 == *\\WIFI//* ==
