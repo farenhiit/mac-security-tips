@@ -137,7 +137,7 @@ for example, path_to_directory=["/Users/sudoman/Library/Preferences/com.apple.lo
 [On Lion and Mountain Lion] $sudo find /path_to_directory -type f  -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
 for example, path_to_directory=["/Users/sudoman","/Volume/Supersecret"]
 }}}
-====Accessed Mails (last access dates) on July 8
+====Accessed Mails (last access dates) on July 8====
 {{{
 [On Lion and Mountain Lion] grep /Users/sudoman/Library/Mail/V2/IMAP-YYYY\@mail.XXXX.fr/INBOX.mbox/ -type f -name *.emlx -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
 }}}
