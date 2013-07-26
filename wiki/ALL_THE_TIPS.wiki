@@ -217,7 +217,7 @@ $sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Re
 
 *WiFI history (last connection, date, SSID, etc.):
 {{{
-/Users/<USERNAME>/Library/Application Support/AddressBook/MailRecents-v4.abcdmr
+defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences| sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 3
 }}}
 
 == *  MISC  * ==
