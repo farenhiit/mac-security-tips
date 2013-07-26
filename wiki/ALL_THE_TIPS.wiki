@@ -166,10 +166,6 @@ $sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log/s
 }}}
 
 
-
-== *\\FORENSICS - LEAK INFO//* ==
-*Coming Soon ...
-
 == *\\MISC//* ==
 *How to take a screenshot every second and store images (during 30s in this example):
 {{{
