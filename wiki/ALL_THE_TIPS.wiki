@@ -125,21 +125,21 @@ $sudo find /Applications/ -name "Info.plist" -type f -exec stat -f '%Sa %N' {} \
 ====Modified files (like autorun App, LaunchAgents or LaunchDaemons) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_file -type f -exec stat -f '%Sm %N' '{}' + |grep -i 'Jul  8'|grep 2013
-for example, path_to_file=["/System/Library/XPCServices/","/System/Library/LaunchAgents/","/Library/LaunchAgents/","/Users/sudoman/Library/LaunchAgents/","/System/Library/LaunchDaemons/","/Library/LaunchDaemons/"]
+for example, path_to_file=["/System/Library/XPCServices/","/System/Library/LaunchAgents/","/Library/LaunchAgents/","/Users/<USERNAME>/Library/LaunchAgents/","/System/Library/LaunchDaemons/","/Library/LaunchDaemons/"]
 }}}
 ====Added files (like trojan or malware App) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_directory -type f -exec stat -f '%SB %N' '{}' + |grep -i 'Jul  8'|grep 2013
-for example, path_to_directory=["/Users/sudoman/Library/Preferences/com.apple.loginitems.plist","/etc/passwd"]
+for example, path_to_directory=["/Users/<USERNAME>/Library/Preferences/com.apple.loginitems.plist","/etc/passwd"]
 }}}
 ====Accessed files (like your secret files) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_directory -type f  -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
-for example, path_to_directory=["/Users/sudoman","/Volume/Supersecret"]
+for example, path_to_directory=["/Users/<USERNAME>","/Volume/Supersecret"]
 }}}
 ====Accessed Mails (last access dates) on July 8====
 {{{
-[On Lion and Mountain Lion] grep /Users/sudoman/Library/Mail/V2/IMAP-YYYY\@mail.XXXX.fr/INBOX.mbox/ -type f -name *.emlx -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
+[On Lion and Mountain Lion] grep /Users/<USERNAME>/Library/Mail/V2/IMAP-YYYY\@mail.XXXX.fr/INBOX.mbox/ -type f -name *.emlx -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
 }}}
 
 ===NETWORK ACTIVITIES===
