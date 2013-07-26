@@ -1,11 +1,17 @@
 #summary All my tips are here.
 
-== *\\FORENSICS - EVENTS//* ==
+== *    FORENSICS - LEAK INFO  * ==
+=== FORENSICS FRAMEWORK===
+ * XXXX: [https://code.google.com/p/XXXX/]
+Coming soon ...
+<br>
+<br>
 
-===PROOF OF CONCEPT===
+== *  FORENSICS - EVENTS  * ==
+=== PROOF OF CONCEPT===
  * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
 
-===STARTUP ACTIVITIES===
+=== STARTUP ACTIVITIES===
 ====Startup dates/hours on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo grep -i 'BOOT_TIME' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
@@ -31,7 +37,7 @@ $sudo bzgrep -i 'Wake reason' /var/log/system.log.*|grep -i 'Jul  8'|awk '{print
 }}}
 
 
-===SESSION ACTIVITIES===
+=== SESSION ACTIVITIES===
 ====Locked session dates/hours on July 8====
 {{{
 [On Mountain Lion] $sudo grep -i 'Application App:"loginwindow"' /var/log/system.log|grep -i 'Jul  8'|awk '{print$1,$2,$3}'
@@ -53,7 +59,7 @@ $sudo bzgrep -i -A 1 'Establishing credentials' /var/log/system.log.*|grep -i 'J
 $sudo bzgrep -i -A 1 'Establishing credentials' /var/log/secure.log.*|grep -i 'Jul  8'|grep 'Got user'|awk '{print$1,$2,$3,$9,$10}'}}}
 }}}
 
-===PHYSICAL CONNECTION ACTIVITIES===
+=== PHYSICAL CONNECTION ACTIVITIES===
 ====USB connections (last loading dates of USB extensions) on July 8====
 {{{
 [On Mountain Lion and Lion] $sudo stat -f '%Sa %N' /System/Library/Extensions/*|external_bin/grep_gnu_lion -i 'Jul  8'|external_bin/grep_gnu_lion 2013|egrep -i 'IOUSBFamily.kext|IOUSBMassStorageClass.kext'
@@ -88,7 +94,7 @@ $sudo ls -lu /System/Library/Extensions/|grep -i '8 Jul'|egrep 'iPodDriver.kext|
 }}}
 
 
-===ESCALATION PRIVILEGES ACTIVITIES===
+=== ESCALATION PRIVILEGES ACTIVITIES===
 ====Opened/Closed TTY terminals on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo grep -i 'ttys' /var/log/system.log|grep -i 'Jul  8'| egrep 'USER_PROCESS|DEAD_PROCESS'|sed -e 's/USER_PROCESS/OPENING TERMINAL/g' |sed -e 's/DEAD_PROCESS/CLOSING TERMINAL/g'| awk '{print $1,$2,$3,$6,$7,$9}'
@@ -113,7 +119,7 @@ $sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul
 [On Lion and Mountain Lion] $sudo praudit -xn /var/audit/current|egrep 'create user|modify password|delete user' -A 3|grep -i 'Jul  8' -A 3|sed 's/\&apos\;/"/g'
 }}}
 
-===APPLICATIONS ACTIVITIES===
+=== APPLICATIONS ACTIVITIES===
 ====Opened applications (last access dates) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
@@ -121,7 +127,7 @@ $sudo stat -f '%Sa %N' /Applications/*/*/* |external_bin/grep_gnu_lion -i 'Jul  
 $sudo find /Applications/ -name "Info.plist" -type f -exec stat -f '%Sa %N' {} \;|grep 'Jul  8'
 }}}
 
-===FILES ACTIVITIES===
+=== FILES ACTIVITIES===
 ====Modified files (like autorun App, LaunchAgents or LaunchDaemons) on July 8====
 {{{
 [On Lion and Mountain Lion] $sudo find /path_to_file -type f -exec stat -f '%Sm %N' '{}' + |grep -i 'Jul  8'|grep 2013
@@ -142,7 +148,7 @@ for example, path_to_directory=["/Users/<USERNAME>","/Volume/Supersecret"]
 [On Lion and Mountain Lion] grep /Users/<USERNAME>/Library/Mail/V2/IMAP-YYYY\@mail.XXXX.fr/INBOX.mbox/ -type f -name *.emlx -exec stat -f '%Sa %N' '{}' + |grep -i 'Jul  8'|grep 2013
 }}}
 
-===NETWORK ACTIVITIES===
+=== NETWORK ACTIVITIES===
 ====Network connections (based on DNS queries) on July 8====
 {{{
 [On Mountain Lion] $sudo grep -i 'DNS+' /var/log/system.log|grep -i 'Jul  8'|grep 'network changed'|awk '{print$1,$2,$3}'
@@ -164,20 +170,15 @@ $sudo bzegrep -i 'frequent transitions|network configuration changed' /var/log/s
 {{{
 [On Lion and Mountain Lion] $sudo defaults read /Volumes/Macintosh\ HD/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist| sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 3 |grep -A 3 2013-07-08
 }}}
+<br>
+<br>
 
-
-== *\\MISC//* ==
-*How to take a screenshot every second and store images (during 30s in this example):
-{{{
-for i in $(seq 1 30);  do sleep 1 && /usr/sbin/screencapture /tmp/screen$i.png;done > /dev/null 2>&1
-}}}
-
-== *\\WIFI//* ==
-
-*My Wifi Scripts:
+== *  WIFI  * ==
+=== My WiFI Scripts===
  * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Check_SSID_like_PASS]
  * [https://code.google.com/p/fun-scripts/source/browse/#svn%2Ftrunk%2FWiFI_Aircrack_Help%253Fstate%253Dclosed]
 
+=== WiFI tricks ===
 *How to display available WiFI networks:
 {{{
 $sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en1 -s
@@ -213,3 +214,16 @@ Failed to join network yellowstay.
 {{{
 $sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport en1 -z
 }}}
+
+*WiFI history (last connection, date, SSID, etc.):
+{{{
+/Users/<USERNAME>/Library/Application Support/AddressBook/MailRecents-v4.abcdmr
+}}}
+
+== *  MISC  * ==
+*How to take a screenshot every second and store images (during 30s in this example):
+{{{
+for i in $(seq 1 30);  do sleep 1 && /usr/sbin/screencapture /tmp/screen$i.png;done > /dev/null 2>&1
+}}}
+<br>
+<br>
