@@ -1,12 +1,5 @@
 #summary All my tips are here.
 
-== *    FORENSICS - LEAK INFO  * ==
-=== FORENSICS FRAMEWORK===
- * XXXX: [https://code.google.com/p/XXXX/]
-Coming soon ...
-<br>
-<br>
-
 == *  FORENSICS - EVENTS  * ==
 === PROOF OF CONCEPT===
  * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
