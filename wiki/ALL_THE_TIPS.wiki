@@ -1,4 +1,170 @@
 #summary All my tips are here.
+== *\\FORENSICS - LEAK INFO//* ==
+=== SYSTEM INFO===
+*Mac identity (name, address, tel, etc.)
+{{{
+/Users/<USERNAME>/Library/Preferences/AddressBookMe.plist
+}}}
+
+*Hashes of user password
+{{{
+[10.6]/var/db/shadow/hash/
+[10.7]/private/var/db/dslocal/nodes/Default/users/<USERNAME>.plist
+[10.8]/private/var/db/dslocal/nodes/Default/users/<USERNAME>.plist
+}}}
+
+*User Keychain (contains a lot of passwords :))
+{{{
+/Users/<USERNAME>/Library/Keychains/login.keychain
+}}}
+
+*System Keychain:
+{{{
+/Library/Keychains/FileVaultMaster.keychain => contained the FileVault Recovery Key to use master password
+/Library/Keychains/System.keychain
+/Library/Keychains/applepushserviced.keychain
+}}}
+
+*Trashes:
+{{{
+/Users/<USERNAME>/.Trash
+/.Trashes
+}}}
+
+
+
+
+=== TOOL EVERYDAY INFO===
+*Address Book
+{{{
+/Users/<USERNAME>/Library/Application Support/AddressBook/MailRecents-v4.abcdmr
+}}}
+
+*Calendar (through Spotlight)
+{{{
+/Users/<USERNAME>/Library/Calendars/Calendar\ Cache
+}}}
+
+*User emails, only text (through Spotlight)
+{{{
+/Users/<USERNAME>/Library/Mail/V2/MailData/Envelope\ Index
+}}}
+
+*User emails, full (through mBox files)
+{{{
+/Users/<USERNAME>/Library/Mail/V2/IMAP-username@mail.test.com/xxxx.mbox
+}}}
+
+*Office documents restored by AutoRecovery service
+{{{
+/Users/<USERNAME>/Library/Application Support/Microsoft/Office/Office 2011 AutoRecovery
+}}}
+
+*Recent printed documents
+{{{
+var/spool/cups/
+[http://sud0man.blogspot.fr http://sud0man.blogspot.fr/2013/01/american-series-are-usefull-in.html]
+}}}
+
+*Text notes taken with Stickies Widget (Widget available natively)
+{{{
+/Users/<USERNAME>/Library/Preferences/widget-com.apple.widget.stickies.plist
+}}}
+
+*Evernotes text notes
+{{{
+/Users/<USERNAME>/Library/Application Support/Evernote/accounts/Evernote/xxxxxxxx/content/
+}}}
+
+
+=== CHAT===
+*Skype messages history (store conversations)
+{{{
+/Users/<USERNAME>/Library/Application\ Support/Skype/xxxxxxxx/main.db
+}}}
+
+*Message history or new iChat (store conversations)
+{{{
+/Users/<USERNAME>/Library/Messages/
+}}}
+
+*iChat history (store conversations)
+{{{
+/Users/<USERNAME>/Documents/iChats/
+}}}
+
+*Adium history (store conversations)
+{{{
+/Users/<USERNAME>/Library/Application\ Support/Adium\ 2.0/Users/Default/Logs/
+}}}
+
+=== iDEVICES===
+
+*iDevice SMS (through iTunes backup)
+{{{
+/Users/<USERNAME>/Library/Application\ Support/MobileSync/Backup/<UUID>/3d0d7e5fb2ce288813306e4d4636395e047a3d28
+}}}
+
+*iDevice Calendar (through iTunes backup)
+{{{
+/Users/<USERNAME>/Library/Application\ Support/MobileSync/Backup/<UUID>/2041457d5fe04d39d0ab481178355df6781e6858
+}}}
+
+*iDevice Call history (through iTunes backup)
+{{{
+/Users/<USERNAME>/Library/Application Support/MobileSync/Backup/<UUID>/ff1324e6b949111b2fb449ecddb50c89c3699a78
+}}}
+
+*iDevice SMS (through iTunes backup)
+{{{
+/Users/<USERNAME>/Library/Application Support/MobileSync/Backup/<UUID>/31bb7ba8914766d4ba40d6dfb6113c8b614be442
+}}}
+
+
+=== WEB BROWSING===
+*Safari Browsing
+{{{
+[HISTORY]/Users/<USERNAME>/Library/Safari/History.plist]
+[COOKIES]/Users/<USERNAME>/Library/Cookies/Cookies.plist
+[COOKIES]/users/<USERNAME>/Library/Cookies/Cookies.binarycookies
+[DOWNLOADS]/Users/<USERNAME>/Library/Safari/Downloads.plist
+}}}
+
+*Safari Webpage Preview (stored Screenhot of your navigation):
+{{{
+/Users/<USERNAME>/Library/Caches/com.apple.Safari/Webpage Previews/
+}}}
+
+*Firefox Browsing
+{{{
+[HISTORY]/Users/<USERNAME>/Library/Application\ Support/Firefox/Profiles/xxxxxxxx.default/places.sqlite
+[COOKIES]/Users/<USERNAME>/Library/Application\ Support/Firefox/Profiles/xxxxxxxx.default/cookies.sqlite
+[DOWNLOADS]/Users/<USERNAME>/Library/Application\ Support/Firefox/Profiles/xxxxxxxx.default/downloads.sqlite
+}}}
+
+*Chrome Browsing
+{{{
+[HISTORY]/Users/<USERNAME>/Library/Application\ Support/Google/Chrome/Default/History
+[COOKIES]/Users/<USERNAME>/Library/Application\ Support/Google/Chrome/Default/Cookies
+[DOWNLOADS]/Users/<USERNAME>/Library/Application\ Support/Google/Chrome/Default/History
+}}}
+
+*Opera Browsing
+{{{
+[HISTORY]/Users/<USERNAME>/Library/Application\ Support/com.operasoftware.Opera/History
+[HISTORY]/Users/<USERNAME>/Library/Opera/global_history.dat
+[COOKIES]/Users/<USERNAME>/Library/Application\ Support/com.operasoftware.Opera/Cookies
+[COOKIES]/Users/<USERNAME>/Library/Opera/cookies4.dat
+[DOWNLOADS]/Users/<USERNAME>/Library/Application\ Support/com.operasoftware.Opera/History
+[DOWNLOADS]/Users/<USER>/Library/Opera/download.dat
+}}}
+
+*QuarantineEventsV (can contain Browser history and iChat)
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
+}}}
+
+
 
 == *  FORENSICS - EVENTS  * ==
 === PROOF OF CONCEPT===
