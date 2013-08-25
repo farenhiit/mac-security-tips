@@ -1,5 +1,5 @@
 #summary All my tips are here.
-== *\\FORENSICS - LEAK INFO//* ==
+== *FORENSICS - LEAK INFO* ==
 === SYSTEM INFO===
 *Mac identity (name, address, tel, etc.)
 {{{
@@ -18,14 +18,14 @@
 /Users/<USERNAME>/Library/Keychains/login.keychain
 }}}
 
-*System Keychain:
+*System Keychain
 {{{
 /Library/Keychains/FileVaultMaster.keychain => contained the FileVault Recovery Key to use master password
 /Library/Keychains/System.keychain
 /Library/Keychains/applepushserviced.keychain
 }}}
 
-*Trashes:
+*Trashes
 {{{
 /Users/<USERNAME>/.Trash
 /.Trashes
