@@ -32,8 +32,6 @@
 }}}
 
 
-
-
 === TOOL EVERYDAY INFO===
 *Address Book
 {{{
@@ -163,9 +161,8 @@ var/spool/cups/
 {{{
 /Users/<USERNAME>/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
 }}}
-
-
-
+<br>
+<br>
 == *  FORENSICS - EVENTS  * ==
 === PROOF OF CONCEPT===
  * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
