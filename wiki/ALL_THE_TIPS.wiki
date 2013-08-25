@@ -1,5 +1,5 @@
 #summary All my tips are here.
-== *FORENSICS - LEAK INFO* ==
+== * FORENSICS - LEAK INFO * ==
 === SYSTEM INFO===
 *Mac identity (name, address, tel, etc.)
 {{{
@@ -20,7 +20,7 @@
 
 *System Keychain
 {{{
-/Library/Keychains/FileVaultMaster.keychain => contained the FileVault Recovery Key to use master password
+/Library/Keychains/FileVaultMaster.keychain => contains the FileVault Recovery Key to use master password
 /Library/Keychains/System.keychain
 /Library/Keychains/applepushserviced.keychain
 }}}
@@ -78,22 +78,22 @@ var/spool/cups/
 
 
 === CHAT===
-*Skype messages history (store conversations)
+*Skype messages history (stores conversations)
 {{{
 /Users/<USERNAME>/Library/Application\ Support/Skype/xxxxxxxx/main.db
 }}}
 
-*Message history or new iChat (store conversations)
+*Message history or new iChat (stores conversations)
 {{{
 /Users/<USERNAME>/Library/Messages/
 }}}
 
-*iChat history (store conversations)
+*iChat history (stores conversations)
 {{{
 /Users/<USERNAME>/Documents/iChats/
 }}}
 
-*Adium history (store conversations)
+*Adium history (stores conversations)
 {{{
 /Users/<USERNAME>/Library/Application\ Support/Adium\ 2.0/Users/Default/Logs/
 }}}
@@ -130,7 +130,7 @@ var/spool/cups/
 [DOWNLOADS]/Users/<USERNAME>/Library/Safari/Downloads.plist
 }}}
 
-*Safari Webpage Preview (stored Screenhot of your navigation):
+*Safari Webpage Preview (stored Screenshot of your navigation):
 {{{
 /Users/<USERNAME>/Library/Caches/com.apple.Safari/Webpage Previews/
 }}}
