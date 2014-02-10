@@ -174,7 +174,7 @@ $ /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.fr
 }}}
 
 
-=== USER ARTIFACTS===
+=== USER ARTEFACTS===
 *Recent searches, Trash setting, view settings, recent folders
 {{{
 /Users/<USERNAME>/Library/Preferences/com.apple.finder.plist
