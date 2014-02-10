@@ -1,16 +1,64 @@
 #summary All my tips are here.
 == * FORENSICS - SYSTEM INFO AND LEAK INFO * ==
 === SYSTEM INFO===
-*Mac identity (name, address, tel, etc.)
+*General information
+{{{
+$ System_profiler
+}}}
+*Owner  (name, address, tel, etc.)
 {{{
 /Users/<USERNAME>/Library/Preferences/AddressBookMe.plist
+/Library/Preferences/AddressBookMe.plist
+/private/var/db/.AppleSetupDone
+}}}
+*Kernel Version and state
+{{{
+/System/Library/PreferencePanes/Ink.prefPane/Contents/Info.plist
+$ sysctl -A
+}}}
+*OS version
+{{{
+/System/Library/PreferencePanes/Ink.prefPane/Contents/Info.plist
+/System/Library/CoreServices/SystemVersion.plist
+/System/Library/CoreServices/ServerVersion.plist (if server)
+$ uname -an
+}}}
+*Timezone
+{{{
+/Library/Preferences/.GlobalPreferences.plist
+/etc/localtime
 }}}
 
-*Hashes of user password
+=== AUTHENTICATION DATA ===
+*Usernames and password hashes
 {{{
+/Users/<USERNAME>
 [10.6]/var/db/shadow/hash/
 [10.7]/private/var/db/dslocal/nodes/Default/users/<USERNAME>.plist
 [10.8]/private/var/db/dslocal/nodes/Default/users/<USERNAME>.plist
+}}}
+
+*Administrators
+{{{
+/var/db/dslocal/nodes/Default/groups/admin.plist
+}}}
+
+*Autologin password (XOR)
+{{{
+/private/etc/kcpassword
+}}}
+
+*Last connected user
+{{{
+/Library/Preferences/com.apple.loginwindow.plist
+}}}
+
+*Last Login Info + Hint master password + autologin user
+/Library/Preferences/com.apple.loginwindow.plist
+
+*Deleted Users
+{{{
+/Library/Preferences/com.apple.preferences.accounts.plist
 }}}
 
 *User Keychain (contains a lot of passwords :))
@@ -23,12 +71,160 @@
 /Library/Keychains/FileVaultMaster.keychain => contains the FileVault Recovery Key to use master password
 /Library/Keychains/System.keychain
 /Library/Keychains/applepushserviced.keychain
+/var/db/SystemKey => contains key to decrpyt System.Keychain
 }}}
 
-*Trashes
+
+=== ALL LOGS ===
 {{{
-/Users/<USERNAME>/.Trash
-/.Trashes
+/var/log/system.log*
+/var/log/windowserver.log*
+/var/log/secure.log*
+/var/log/kernel.log*
+/private/var/log/install.log*
+/private/var/log/appfirewall.log*
+/var/audit/*
+}}}
+
+
+
+=== PERSISTENCE ===
+*XPC Services
+{{{
+$ find /Applications/ -name XPCServices -exec ls -lsct {} \;
+}}}
+*Launched XPC System
+{{{
+/System/Library/XPCServices/
+}}}
+*Launched Agents System
+{{{
+/System/Library/LaunchAgents/
+}}}
+*Launched Agents Library
+{{{
+/Library/LaunchAgents/
+}}}
+*Launched Daemons System
+{{{
+/System/Library/LaunchDaemons/
+}}}
+*Launched Daemons Library
+{{{
+/Library/LaunchDaemons/
+}}}
+*Launched LoginItems User
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.loginitems.plist
+}}}
+*Launched LoginItems Application
+{{{
+$ find /Applications/ -name LoginItems -exec ls -lsct {} \;
+}}}
+*Launched ScriptingAdditions
+{{{
+/System/Library/ScriptingAdditions/
+/Library/ScriptingAdditions/
+}}}
+*Launchd DB
+{{{
+/private/var/db/launchd.db/
+$ find /private/var/db/launchd.db/ -name com.apple.launchd.peruser.* -exec ls -lsct {} \;/com.apple.launchd.peruser.*
+}}}
+*Loaded_Drivers
+{{{
+$ kexstat
+}}}
+*All Extensions
+{{{
+/System/Library/Extensions/
+}}}
+*Extra Extensions
+{{{
+/Extra/Extensions/
+}}}
+*Crontab
+{{{
+$ crontab -u root -l , crontab -u <USERNAME> -l
+}}}
+
+
+=== APPLICATIONS===
+*Installation History
+{{{
+/Library/Receipts/InstallHistory.plist
+}}}
+*Updates History
+{{{
+/Library/Preferences/com.apple.SoftwareUpdate.plist
+}}}
+*Last launched applications
+{{{
+ls -lshtr /Library/Caches
+ls -lshtr /Users/<USERNAME>/Library/Caches
+}}}
+*All installed Application and association files
+{{{
+$ /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -dump | grep --after-context 1 "^bundle" | grep --only-matching "/.*\.app"$
+$ /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -dump -seed -all u,s,n,l
+}}}
+
+
+=== USER ARTIFACTS===
+*Recent searches, Trash setting, view settings, recent folders
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.finder.plist
+}}}
+
+*Applications in the Dock
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.dock.plist
+}}}
+
+*folders and network shares in the Dock
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.dock.plist
+}}}
+
+*Desktop picture
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.desktop.plist
+}}}
+
+*recent documents, applications, and network connections
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.recentitems.plist 
+}}}
+
+*Preview files
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.Preview.LSSharedFileList.plist
+}}}
+
+=== USER SYSTEM HISTORY===
+*Concole Search History
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.Console.plist
+}}}
+*SQLite History
+{{{
+/Users/<USERNAME>/.sqlite_history
+}}}
+*BASH History
+{{{
+/Users/<USERNAME>/.bash_history
+}}}
+*SH History
+{{{
+/Users/<USERNAME>/.sh_history
+}}}
+*Last logged users
+{{{
+$ last
+}}}
+*Connected media history
+{{{
+/Users/<USERNAME>/Library/Preferences/com.apple.sidebarlists.plist
 }}}
 
 
@@ -67,6 +263,8 @@ var/spool/cups/
 *Text notes taken with Stickies Widget (Widget available natively)
 {{{
 /Users/<USERNAME>/Library/Preferences/widget-com.apple.widget.stickies.plist
+/Users/<USERNAME>/Library/StickiesDatabase
+/Users/<USERNAME>/Library/Containers/com.apple.Notes/Data/Library/Notes/NotesV1.storedata-wal 
 }}}
 
 *Evernotes text notes
@@ -154,15 +352,90 @@ var/spool/cups/
 [COOKIES]/Users/<USERNAME>/Library/Application\ Support/com.operasoftware.Opera/Cookies
 [COOKIES]/Users/<USERNAME>/Library/Opera/cookies4.dat
 [DOWNLOADS]/Users/<USERNAME>/Library/Application\ Support/com.operasoftware.Opera/History
-[DOWNLOADS]/Users/<USER>/Library/Opera/download.dat
+[DOWNLOADS]/Users/<USERNAME>/Library/Opera/download.dat
 }}}
 
 *QuarantineEventsV (can contain Browser history and iChat)
 {{{
 /Users/<USERNAME>/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV*
 }}}
+
+
+=== DELETED/RECOVERED DATA===
+{{{
+*Trashes
+/Users/<USERNAME>/.Trash
+/.Trashes
+}}}
+*Recovery Office Files
+{{{
+/Users/<USERNAME>/Library/Application Support/Microsoft/Office/Office 2011 AutoRecovery
+}}}
+
+
+=== NETWORK HISTORY===
+*Bluetooth History
+{{{
+/Library/Preferences/com.apple.Bluetooth.plist
+}}}
+*Network History
+{{{
+/Library/Preferences/SystemConfiguration/com.apple.network.identification.plist
+}}}
+WiFI AP History
+{{{
+$ defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences|sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 3
+}}}
+Remote Desktop History
+{{{
+/Library/Preferences/com.apple.RemoteDesktop.plist
+}}}
+
+
+=== NETWORK CONFIGURATION===
+*Firewall
+{{{
+/Library/Preferences/com.apple.alf.plist
+}}}
+*Wireless
+{{{
+/Library/Preferences/SystemConfiguration/com.apple.airport.preferences.plist
+}}}
+*NAT
+{{{
+/Library/Preferences/SystemConfiguration/com.apple.nat.plist
+}}}
+*SMB Server
+{{{
+/Library/Preferences/SystemConfiguration/com.apple.smb.server.plist
+}}}
+*Interfaces (10.8)
+{{{
+/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist
+}}}
+*Interfaces
+{{{
+/Library/Preferences/SystemConfiguration/com.apple.NetworkInterfaces.plist
+/Library/Preferences/SystemConfiguration/com.apple.preferences.plist
+/Library/Preferences/SystemConfiguration/preferences.plist
+}}}
+
+=== MEMORY===
+*Hibernate file
+{{{
+/private/var/vm/sleepimage
+}}}
+*Swap file
+{{{
+/private/var/vm/swapfile0
+}}}
+
+
 <br>
 <br>
+
+
+
 == *  FORENSICS - EVENTS  * ==
 === PROOF OF CONCEPT===
  * CheckOut4Mac: [https://code.google.com/p/checkout4mac/]
