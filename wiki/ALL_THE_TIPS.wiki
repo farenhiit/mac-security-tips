@@ -2,6 +2,8 @@
 Note : if $ xxx => command xxx to launch, else => file or directory to dump.
 
 == * FORENSICS - SYSTEM INFO AND LEAK INFO * ==
+=== PROOF OF CONCEPT===
+ * Pac4Mac: [https://code.google.com/p/pac4mac/]
 === SYSTEM INFO===
 *General information
 {{{
