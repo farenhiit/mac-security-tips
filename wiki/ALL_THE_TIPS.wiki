@@ -1,5 +1,5 @@
 #summary All my tips are here.
-== * FORENSICS - LEAK INFO * ==
+== * FORENSICS - SYSTEM INFO AND LEAK INFO * ==
 === SYSTEM INFO===
 *Mac identity (name, address, tel, etc.)
 {{{
@@ -278,7 +278,9 @@ $sudo bzgrep -i 'incorrect password attempts' /var/log/secure.log.*|grep -i 'Jul
 === APPLICATIONS ACTIVITIES===
 ====Opened applications (last access dates) on July 8====
 {{{
-[On Lion and Mountain Lion] $sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
+[On Lion and Mountain Lion] 
+$ls -lshtr /Users/<USER>/Library/Caches | grep 'Jul 8'
+$sudo find /Applications -maxdepth 3 -type f -exec ls -lu {} \; |grep Info.plist |grep  -i '8 Jul'|grep -v root|awk '{$7=""}1'
 $sudo stat -f '%Sa %N' /Applications/*/*/* |external_bin/grep_gnu_lion -i 'Jul  8'
 $sudo find /Applications/ -name "Info.plist" -type f -exec stat -f '%Sa %N' {} \;|grep 'Jul  8'
 }}}
