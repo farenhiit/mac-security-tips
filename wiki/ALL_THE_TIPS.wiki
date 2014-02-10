@@ -1,5 +1,5 @@
 #summary All my tips are here.
-Note : if $ => command to launch, else => file or directory to dump.
+Note : if $ xxx => command xxx to launch, else => file or directory to dump.
 
 == * FORENSICS - SYSTEM INFO AND LEAK INFO * ==
 === SYSTEM INFO===
