@@ -364,8 +364,8 @@ var/spool/cups/
 
 
 === DELETED/RECOVERED DATA===
-{{{
 *Trashes
+{{{
 /Users/<USERNAME>/.Trash
 /.Trashes
 }}}
@@ -384,11 +384,11 @@ var/spool/cups/
 {{{
 /Library/Preferences/SystemConfiguration/com.apple.network.identification.plist
 }}}
-WiFI AP History
+*WiFI AP History
 {{{
 $ defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences|sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 3
 }}}
-Remote Desktop History
+*Remote Desktop History
 {{{
 /Library/Preferences/com.apple.RemoteDesktop.plist
 }}}
