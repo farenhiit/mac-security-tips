@@ -158,6 +158,13 @@ $ crontab -u root -l , crontab -u <USERNAME> -l
 {{{
 /Library/Receipts/InstallHistory.plist
 }}}
+*Uninstallation History
+{{{
+sudo egrep --colour=auto -Ri 'uninstalld|removing Application' /var/log/*
+sample : 
+/var/log/commerce.log:Nov 26 15:42:35 amalard-3.mrc.cossi.internet storeassetd[413]: SoftwareMapSpotlightSource: removing Application <CKSoftwareProduct: 0x7ff538f2fda0>: (com.tastycocoabytes.CocoaPacketAnalyzer.mas, 1.31, 418357707:660823895 VPP:NO source:Spotlight /Applications/CocoaPacketAnalyzer.app) 
+/var/log/system.log:Nov 26 15:42:30 amalard-3.mrc.cossi.internet uninstalld[2105]: Could not get Info.plist for /Applications/CocoaPacketAnalyzer.app
+}}}
 *Updates History
 {{{
 /Library/Preferences/com.apple.SoftwareUpdate.plist
