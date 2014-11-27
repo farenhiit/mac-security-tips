@@ -56,10 +56,10 @@ $ uname -an
 {{{
 /Library/Preferences/com.apple.loginwindow.plist
 }}}
-
 *Last Login Info + Hint master password + autologin user
+{{{
 /Library/Preferences/com.apple.loginwindow.plist
-
+}}}
 *Deleted Users
 {{{
 /Library/Preferences/com.apple.preferences.accounts.plist
